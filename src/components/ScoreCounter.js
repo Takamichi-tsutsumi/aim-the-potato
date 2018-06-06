@@ -8,7 +8,9 @@ export default class ScoreCounter extends React.Component {
 
     return (
       <div>
-        <span>{score.point.toLocaleString()} scored!!</span>
+        <span className="score-counter">
+          {score.point.toLocaleString()} points
+        </span>
       </div>
     )
   }

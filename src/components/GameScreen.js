@@ -1,5 +1,6 @@
 import React from 'react'
 import { observer } from 'mobx-react'
+import Target from './Target'
 import { STATUS } from '../constants'
 
 @observer
@@ -15,9 +16,22 @@ export default class GameScreen extends React.Component {
     const { game } = this.props
 
     return (
-      <div>
-        <button onClick={() => this.getPoint(10)}>Get 10 points</button>
+      <div style={containerStyle}>
+        {game.status === STATUS.PLAYING && (
+          <Target
+            onClick={() => {
+              this.getPoint(10)
+            }}
+          />
+        )}
       </div>
     )
   }
+}
+
+const containerStyle = {
+  position: 'relative',
+  width: '100%',
+  height: '50rem',
+  backgroundColor: 'lightblue'
 }

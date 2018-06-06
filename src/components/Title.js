@@ -1,3 +1,3 @@
 import React from 'react'
 
-export default () => <h1>メイトをポン！！</h1>
+export default () => <h1>ポテトをねらえ！</h1>

@@ -5,8 +5,8 @@ import { observer } from 'mobx-react'
 export default class TimeCounter extends React.Component {
   render() {
     return (
-      <div>
-        <span>{this.props.timer.timeRemains} seconds left</span>
+      <div className="timer">
+        <span className="timer-count">{this.props.timer.timeRemains}</span>
       </div>
     )
   }

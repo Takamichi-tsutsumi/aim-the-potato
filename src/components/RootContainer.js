@@ -13,13 +13,6 @@ export default class MainScreen extends React.Component {
 
     return (
       <div>
-        <p>
-          {game.playing
-            ? 'Now Playing'
-            : game.over
-              ? 'GAME OVER!!'
-              : 'Click start to play!'}
-        </p>
         <Navigation
           onStart={game.start}
           onStop={game.stop}
