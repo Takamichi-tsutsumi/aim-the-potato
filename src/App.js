@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { observer } from 'mobx-react'
 
 import Title from './components/Title'
-import MainScreen from './components/MainScreen'
+import RootContainer from './components/RootContainer'
 import GameState from './stores/Game'
 
 class App extends React.Component {
@@ -13,9 +13,7 @@ class App extends React.Component {
     return (
       <div>
         <Title />
-        <MainScreen game={game} />
-        <button onClick={game.start}>Start!!</button>
-        <button onClick={game.stop}>Stop!!</button>
+        <RootContainer game={game} />
       </div>
     )
   }

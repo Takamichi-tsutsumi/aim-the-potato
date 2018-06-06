@@ -1,5 +1,10 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 
 export default class Score {
-  @observable score = 0
+  @observable point = 0
+
+  @action.bound
+  getPoint = point => {
+    this.point += point
+  }
 }

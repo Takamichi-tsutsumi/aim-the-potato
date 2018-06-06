@@ -1,1 +1,8 @@
-export const DEFAULT_TIME_LIMIT = 60
+export const DEFAULT_TIME_LIMIT = 10
+
+export const STATUS = {
+  INITIAL: 'INITIAL',
+  PLAYING: 'PLAYING',
+  PAUSED: 'PAUSED',
+  OVER: 'OVER'
+}

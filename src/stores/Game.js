@@ -1,29 +1,43 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 
 import Timer from './Timer'
 import Score from './Score'
+import { STATUS } from '../constants'
 
 export default class Game {
-  @observable playing = false
+  @observable status = STATUS.INITIAL
 
   constructor() {
-    this.timer = new Timer()
+    this.timer = new Timer(this.timeup)
     this.score = new Score()
   }
 
+  @action.bound
   start = () => {
     this.timer.start()
-    this.playing = true
+    this.status = STATUS.PLAYING
   }
 
+  @action.bound
   stop = () => {
     this.timer.stop()
-    this.playing = false
+    this.status = STATUS.PAUSED
   }
 
+  restart = () => {
+    this.reset()
+    this.start()
+  }
+
+  @action.bound
   reset = () => {
-    this.timer = new Timer()
+    this.timer = new Timer(this.timeup)
     this.score = new Score()
-    this.playing = false
+    this.status = STATUS.INITIAL
+  }
+
+  @action.bound
+  timeup = () => {
+    this.status = STATUS.OVER
   }
 }

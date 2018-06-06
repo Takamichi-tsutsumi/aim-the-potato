@@ -1,8 +1,15 @@
 import React from 'react'
+import { observer } from 'mobx-react'
 
-const score = 1000
-export default () => (
-  <div>
-    <span>{score.toLocaleString()}</span>
-  </div>
-)
+@observer
+export default class ScoreCounter extends React.Component {
+  render() {
+    const { score } = this.props
+
+    return (
+      <div>
+        <span>{score.point.toLocaleString()} scored!!</span>
+      </div>
+    )
+  }
+}

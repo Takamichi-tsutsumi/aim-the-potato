@@ -1,32 +1,36 @@
-import { observable, computed } from 'mobx'
+import { observable, computed, action } from 'mobx'
 import { DEFAULT_TIME_LIMIT } from '../constants'
 
 export default class Timer {
   @observable time = 0
-  @observable timeLimit = DEFAULT_TIME_LIMIT
-  @observable started = false
+  timeLimit = DEFAULT_TIME_LIMIT
   timer
+
+  constructor(timeupCallback) {
+    this.timeupCallback = timeupCallback
+  }
 
   @computed
   get timeRemains() {
     return this.timeLimit - this.time
   }
 
+  @action.bound
   countUp = () => {
     this.time += 1
   }
 
   start = () => {
-    if (this.started) return
-
-    this.timer = setInterval(this.countUp, 1000)
-
-    this.started = true
+    this.timer = setInterval(() => {
+      this.countUp()
+      if (this.timeRemains === 0) {
+        this.timeup()
+      }
+    }, 1000)
   }
 
   stop = () => {
     clearInterval(this.timer)
-    this.started = false
   }
 
   resume = () => {
@@ -36,12 +40,15 @@ export default class Timer {
   reset = () => {
     clearInterval(this.timer)
     this.time = 0
-    this.started = false
   }
 
   restart = () => {
     this.reset()
     this.start()
-    this.started = true
+  }
+
+  timeup = () => {
+    clearInterval(this.timer)
+    this.timeupCallback()
   }
 }
